@@ -1,0 +1,45 @@
+<?php 
+	class Pelajaran
+	{
+		
+		function __construct()
+		{
+			date_default_timezone_set('Asia/Jakarta');
+			$conn = mysqli_connect ("localhost", "root", "","lmu_id");
+
+			if (mysqli_connect_errno()){
+  				echo "Koneksi Gagal".mysqli_connect_error();
+ 			}	
+		}
+		function getPelajaran(){
+			$data = mysqli_query($this->conn, "SELECT * FROM mata_pelajaran");
+			while ($row = mysqli_fetch_array($data)) {
+				$res = $row;
+			}
+			return $res;
+		}
+		function getPelajaranById($id_pelajaran){
+			$data = mysqli_query($this->conn, "SELECT * FROM mata_pelajaran WHERE id_pelajaran = ".$id);
+			while ($row = mysqli_fetch_array($data)) {
+				$res = $row;
+			}
+			return $res;
+		}
+		function addPelajaran($title_pelajaran, $id, $isi_pelajaran){
+			$ins = mysqli_query($this->conn, "INSERT INTO mata_pelajaran VALUES(null,'$judul_pelajaran','$id', '$isi_pelajaran')");
+			
+			return $ins;
+		}
+
+		function updatePelajaran($id_pelajaran, $title_pelajaran, $id, $isi_pelajaran){
+			$ed = mysqli_query($this->conn, "UPDATE mata_pelajaran SET id_pelajaran
+			 = '$id_pelajaran', judul_pelajaran = '$judul_pelajaran', isi_pelajaran = '$isi_pelajaran'WHERE id_article = $id_article");
+			return $ed;
+		}
+
+		function deleteMenu($id){
+			$del = mysqli_query($this->conn, "DELETE FROM mata_pelajaran WHERE id_pelajaran = $id_pelajaran");
+			return $del;
+		}
+	}
+?>
