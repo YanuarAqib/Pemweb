@@ -1,0 +1,43 @@
+<?php 
+	class Jurusan{
+		function __construct(){
+			$this->conn = mysqli_connect('localhost', 'root', '', 'lmu_id');
+
+			if (mysqli_connect_errno()) {
+				echo mysqli_connect_error();
+			}
+		}
+
+		function getJurusan(){
+			$data = mysqli_query($this->conn, "SELECT * FROM jurusan");
+			while ($row = mysqli_fetch_array($data)) {
+				$res = $row;
+			}
+			return $res;
+		}
+
+		function getMenuJurusanById($id){
+			$data = mysqli_query($this->conn, "SELECT * FROM jurusan WHERE id_jurusan = ".$id);
+			while ($row = mysqli_fetch_array($data)) {
+				$res = $row;
+			}
+			return $res;
+		}
+
+		function addJurusan($jurusan, $jurusan_name){
+			$ins = mysqli_query($this->conn, "INSERT INTO jurusan VALUES(null,'$jurusan', '$jurusan_name')");
+			
+			return $ins;
+		}
+
+		function updateMenuJurusan($id, $jurusan, $jurusan_name){
+			$ed = mysqli_query($this->conn, "UPDATE jurusan SET id_jurusan = '$jurusan', jurusan_name = '$jurusan_name' WHERE id_jurusan = $id");
+			return $ed;
+		}
+
+		function deleteMenuJurusan($id){
+			$del = mysqli_query($this->conn, "DELETE FROM jurusan WHERE id_jurusan = $id");
+			return $del;
+		}
+	}
+ ?>
